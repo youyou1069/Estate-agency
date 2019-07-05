@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% if property.fileName %}
+                    <img src="{{ vich_uploader_asset(property,'imageFile') | imagine_filter('my_medium') }}"
+                         alt="card-img-top" style="width: 100%; height: auto">
+                    {#<img src="/images/properties/{{ property.fileName | imagine_filter('my_thumb') }}" alt="card-img-top" style="width: 100%; height: auto">#}
+                {% else %}
+                    <img src="{{ '/images/properties/empty.jpg' | imagine_filter('my_medium') }}" alt="card-img-top"
+                         style="width: 100%; height: auto">
+                {% endif %}
+                {# <img src="{{ asset('img/Koala.jpg')  }}" alt=""> #}
+            </div>
+            <div class="col-md-4">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <h4>{{ property.name }}</h4>
+                <h5> {{ property.rooms }} pieces - {{ property.surface }} m²</h5>
+                <div class="text-primary"
+                     style="font-size: 3em; font-weight: bold; "> {{ property.price | number_format (2, '.', ',') }}
+                    €
+                </div>
+                <a href="#" class="btn btn-primary select" id="contactButton" {% if form.vars.submitted %} style="display: none" {% endif %}>Contacter l'agence</a>
+                <div class="mt-4" id="contactForm" {% if not form.vars.submitted %} style="display: none" {% endif %}>
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col">{{ form_row(form.firstname) }}</div>
+                        <div class="col">{{ form_row(form.lastname) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{{ form_row(form.phone) }}</div>
+                        <div class="col">{{ form_row(form.email) }}</div>
+                    </div>
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <button class="btn btn-primary">Envoyer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt:4">
+        <p>Description : {{ property.description | raw }}</p>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h5> Caractéristiques </h5>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Surface habitable</td>
+                        <td>{{ property.surface }} m²</td>
+                    </tr>
+                    <tr>
+                        <td>Pieces</td>
+                        <td>{{ property.rooms }}</td>
+                    </tr>
+                    <tr>
+                        <td>Chambres</td>
+                        <td>{{ property.badrooms }}</td>
+                    </tr>
+                    <tr>
+                        <td>Etage</td>
+                        <td>{{ property.floor }}</td>
+                    </tr>
+                    <tr>
+                        <td>Chauffage</td>
+                        <td>{{ property.heat }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md4">
+                <h5>Spécificités</h5>
+                <table  class="table table-striped">
+                  {% for option in property.options %}
+                  <tr>
+                      <td> {{ option.nom }} </td>
+                   </tr>
+                  {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+     let contactButton = $('#contactButton');
+         $(contactButton).click(function(e) {
+             e.preventDefault();
+             $('#contactForm').slideDown();
+             $(contactButton).slideUp();
+     })
+ });
+ </script>
+
+{% endblock %}
+        {% block stylesheets %}
+        <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script>
+        $('select').select2();
+    </script>
+{% endblock %}

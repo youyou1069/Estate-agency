@@ -1,0 +1,51 @@
+<section class="properties mt:4 text-center">
+
+    <article>
+        <h2>{{ property.name }}</h2>
+        <div class="metadata"> Créer le {{ property.createdAt | date ('d/m/y à H:i')   }}</div>
+        <div class="content"><img src="{{ property.image }}" alt="">  </div>
+
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Price : {{ property.price | number_format (2, '.', ',')}}  euros
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Address : {{ property.address }}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                City : {{ property.city  }}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Postal code : {{ property.postalCode | number_format (2, ' ') }}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Surface {{ property.surface }}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Rooms : {{ property.rooms }}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Floor :  {{ property.floor}}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Description : {{ property.description | raw }}
+            </li>
+
+
+        </ul>
+        <div class="jumbotron">
+
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{{ path('property_show', {'id':property.id })}}" role="button">Lire la suite</a>
+            </p>
+        </div>
+
+    </article>
+
+
+
+</section>

@@ -1,0 +1,30 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-4"> {{ form_row(form.name, {'label': 'Titre du bien'}) }}</div>
+    <div class="col-md-4">{{ form_row(form.surface, {'label': 'Surface du bien'}) }}</div>
+    <div class="col-md-4">{{ form_row(form.price, {'label': 'Prix'}) }}</div>
+</div>
+<div class="row">
+    <div class="col-md-2"> {{ form_row(form.rooms, {'label': 'Nombre de pieces'}) }}</div>
+    <div class="col-md-2">{{ form_row(form.badrooms, {'label': 'Nombre de chambre'}) }}</div>
+    <div class="col-md-4">{{ form_row(form.imageFile, {'label': 'Image'}) }}</div>
+    <div class="col-md-2">{{ form_row(form.heat, {'label': 'Chauffage'}) }}</div>
+    <div class="col-md-2">{{ form_row(form.floor, {'label': 'Etage'}) }}</div>
+
+</div>
+<div class="row">
+    <div class="col-md-4"> {{ form_row(form.address, {'label': 'Adresse'}) }}</div>
+    <div class="col-md-4">{{ form_row(form.city, {'label': 'Ville'}) }}</div>
+    <div class="col-md-4">{{ form_row(form.postal_code, {'label': 'Code Postale'}) }}
+    </div><div class="col-md-4">{{ form_row(form.sold, {'label': 'Vendu'}) }}</div>
+</div>
+
+{{ form_row(form.description, {'label': 'Description du bien'}) }}
+
+
+    {{ form_row(form.image, {'label': 'Photo'}) }}
+
+{{ form_rest(form) }}
+
+<div><button type="submit" class="btn btn-success">Enregistrer</button></div>
+{{ form_end(form) }}

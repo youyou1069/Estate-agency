@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Tous nos biens{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+            <div class="form-row align-items-end">
+                <div class="col">{{ form_row(form.minSurface) }}</div>
+                <div class="col">{{ form_row(form.maxPrice) }}</div>
+                <div class="col">{{ form_row(form.options) }}</div>
+
+                <div class="form-group"><div class="col"><button class="btn-primary">Rechercher</button></div></div>
+
+
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="container mt:4 ">
+        <h1>Tous nos Biens</h1>
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    {% include 'property/_property.html.twig' %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+    <div class="text-center">{{ knp_pagination_render(properties) }}</div>
+
+{% endblock %}
+{% block stylesheets %}
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script>
+        $('select').select2();
+    </script>
+{% endblock %}

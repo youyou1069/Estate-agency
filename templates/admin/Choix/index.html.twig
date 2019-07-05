@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les options !{% endblock %}
+
+{% block body %}
+    <div class="container mt:4 ">
+        <h1>Gérer les options</h1>
+        {% for message in app.flashes ('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    <table class="table table-striped">
+        <head>
+            <tr>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+        </head>
+        <tbody>
+        {% for choix in choixs %}
+            <tr>
+                <td>{{ choix.nom }}</td>
+
+                <td><a href="{{ path('choix_edit', {'id':choix.id }) }}" class="btn btn-secondary"> Editer </a>
+                <form method="post" action="{{ path('choix_delete', {'id':choix.id }) }}" style="display: inline-block" onsubmit="return confirm('Etes vous vraiment sûr ?')">
+                    <input type="hidden" name="_method" value="DELETE">
+
+                <button class="btn btn-danger"> Supprimer </button>
+                </form>
+                </td>
+            </tr>
+        {% endfor %}
+         </tbody>
+    </table>
+
+
+<div class="text">
+
+    <a href="{{ path('choix_new') }}" class="btn btn-primary">Créer  une nouvelle option </a>
+</div>
+
+
+
+{% endblock %}
